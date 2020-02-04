@@ -81,6 +81,18 @@ class Game extends React.Component {
     }
 
     jumpTo(step) {
+        if (step) {
+            const history = this.state.history.slice();
+            const {line, column} = history[step].coords;
+            const squareNumber = (((line - 1) * 3) + column) - 1;
+
+            const square = document.getElementsByClassName('square')[squareNumber];
+            square.classList.add('highlight-square');
+            setTimeout(() => {
+                square.classList.remove('highlight-square');
+            }, 2000);
+
+        }
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,

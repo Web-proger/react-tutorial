@@ -36,6 +36,18 @@ ol, ul {
     outline: none;
 }
 
+@keyframes highlight {
+    from {outline: 0 solid white;}
+    50% {outline: 2px solid orange;}
+    to {outline: 0 solid white;}
+}
+
+.highlight-square {
+    position: relative;
+    z-index: 1;
+    animation: highlight 2s ease-in-out;
+}
+
 .kbd-navigation .square:focus {
     background: #ddd;
 }
