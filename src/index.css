@@ -42,10 +42,22 @@ ol, ul {
     to {outline: 0 solid white;}
 }
 
+@keyframes highlight-ln {
+    from {outline: 0 solid white;}
+    50% {outline: 2px solid green;}
+    to {outline: 0 solid white;}
+}
+
 .highlight-square {
     position: relative;
     z-index: 1;
     animation: highlight 2s ease-in-out;
+}
+
+.highlight-line {
+    position: relative;
+    z-index: 1;
+    animation: highlight-ln 2s ease-in-out;
 }
 
 .kbd-navigation .square:focus {
