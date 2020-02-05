@@ -127,6 +127,8 @@ class Game extends React.Component {
                     square.classList.remove('highlight-line');
                 }, 2000);
             });
+        } else if (winner.draw){
+            status = 'Ничья!';
         } else {
             status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -171,8 +173,11 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return {player: squares[a], line: [a, b, c]};
+            return {player: squares[a], line: [a, b, c], draw: false};
         }
     }
-    return {player: null, line: []};
+    for (let i = 0; i < squares.length; i++) {
+        if (squares[i] === null) return {player: null, line: [], draw: false};
+    }
+    return {player: null, line: [], draw: true};
 }
