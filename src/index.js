@@ -47,6 +47,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            reverseSort: false,
         }
     }
 
@@ -90,12 +91,17 @@ class Game extends React.Component {
         })
     }
 
+    invertSort() {
+        this.setState({reverseSort: !this.state.reverseSort})
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
+        const reverseSort = this.state.reverseSort;
 
-        const moves = history.map((step, move) => {
+        let moves = history.map((step, move) => {
             const coords = history[move].coords;
             const desc = move ? 'Перейти к ходу #' + move : 'К началу игры';
             return (
@@ -106,6 +112,10 @@ class Game extends React.Component {
                 </li>
             );
         });
+
+        if (reverseSort) {
+            moves = moves.reverse();
+        }
 
         let status;
         if (winner) {
@@ -124,6 +134,8 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
+                    <br/>
+                    <button onClick={() => this.invertSort()}>Обратная сортировка: {reverseSort ? 'Да' : 'Нет'}</button>
                     <ol>{moves}</ol>
                 </div>
             </div>
